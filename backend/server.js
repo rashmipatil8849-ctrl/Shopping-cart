@@ -4,35 +4,41 @@ require('dotenv').config();
 
 const connectDB = require('./config/db');
 
-// ROUTES
-const userRoutes = require('./routes/userRoutes');
-const itemRoutes = require('./routes/itemRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-const orderRoutes = require('./routes/orderRoutes');
-
-// CREATE APP FIRST
 const app = express();
 
 // CONNECT DB
 connectDB();
 
-// MIDDLEWARE
-app.use(cors());
+// CORS 
+app.use(
+  cors({
+    origin: [
+      'http://localhost:5173',
+      'https://shopping-cart-app2026.netlify.app'
+    ],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true
+  })
+);
+
+// allow preflight
+app.options('*', cors());
+
+// Middleware
 app.use(express.json());
 
-// ROUTES
-app.use('/api/users', userRoutes);
-app.use('/api/items', itemRoutes);
-app.use('/api/carts', cartRoutes);
-app.use('/api/orders', orderRoutes);
+// Routes
+app.use('/api/users', require('./routes/userRoutes'));
+app.use('/api/items', require('./routes/itemRoutes'));
+app.use('/api/carts', require('./routes/cartRoutes'));
+app.use('/api/orders', require('./routes/orderRoutes'));
 
-// ROOT TEST
 app.get('/', (req, res) => {
   res.send('Shopping Cart API Running');
 });
 
-// START SERVER
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () =>
+  console.log(`Server running on port ${PORT}`)
+);

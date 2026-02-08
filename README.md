@@ -253,6 +253,18 @@ Admin dashboard
 
 Order status tracking
 
+
+## Live Demo
+
+Frontend: https://your-netlify-url.netlify.app  
+Backend API: https://shopping-cart-jn3t.onrender.com
+
+Frontend (Netlify / Vercel)
+   ↓ HTTPS
+Backend API (Render)
+   ↓
+MongoDB Atlas
+
 👩‍💻 Author
 
 Rashmi Patil
