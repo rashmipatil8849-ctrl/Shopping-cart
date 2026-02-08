@@ -36,14 +36,15 @@ export default function ItemList({ openCart, openOrders,onLogout }) {
   };
 
   const addToCart = async (itemId) => {
-    try {
-      await api.post('/carts', { itemId });
-      setToast({ message: 'Item added to cart', type: 'success' });
-      loadCartCount();
-    } catch {
-      setToast({ message: 'Failed to add item to cart', type: 'error' });
-    }
-  };
+  try {
+    await api.post('/carts', { itemId });
+    setToast({ message: 'Item added to cart', type: 'success' });
+    loadCartCount();
+  } catch (err) {
+    console.error(err.response?.data || err);
+    setToast({ message: 'Failed to add item to cart', type: 'error' });
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-100">
