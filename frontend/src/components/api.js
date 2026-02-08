@@ -4,7 +4,6 @@ const api = axios.create({
   baseURL: 'https://shopping-cart-jn3t.onrender.com/api'
 });
 
-// attach token automatically
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
   if (token) {
