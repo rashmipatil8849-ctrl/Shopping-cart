@@ -4,20 +4,17 @@ require('dotenv').config();
 
 const connectDB = require('./config/db');
 
-const app = express();
+const app = express(); 
 
-// Connect MongoDB
+// DB
 connectDB();
 
-// CORS 
+// Middleware
 app.use(cors({
-  origin: [
-    'http://localhost:5173',
-    'https://shopping-cart-app2026.netlify.app'
-  ],
-  credentials: true
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
 app.use(express.json());
 
 // Routes
@@ -32,6 +29,6 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () =>
-  console.log(`Server running on port ${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
