@@ -6,26 +6,18 @@ const connectDB = require('./config/db');
 
 const app = express();
 
-// CONNECT DB
+// Connect MongoDB
 connectDB();
 
 // CORS 
-app.use(
-  cors({
-    origin: [
-      'http://localhost:5173',
-      'https://shopping-cart-app2026.netlify.app'
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
-  })
-);
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'https://shopping-cart-app2026.netlify.app'
+  ],
+  credentials: true
+}));
 
-// allow preflight
-app.options('*', cors());
-
-// Middleware
 app.use(express.json());
 
 // Routes
@@ -34,6 +26,7 @@ app.use('/api/items', require('./routes/itemRoutes'));
 app.use('/api/carts', require('./routes/cartRoutes'));
 app.use('/api/orders', require('./routes/orderRoutes'));
 
+// Health check
 app.get('/', (req, res) => {
   res.send('Shopping Cart API Running');
 });
