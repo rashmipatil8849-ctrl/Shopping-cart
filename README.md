@@ -256,8 +256,7 @@ Order status tracking
 
 ## Live Demo
 
-Frontend: https://your-netlify-url.netlify.app  
-Backend API: https://shopping-cart-jn3t.onrender.com
+https://shopping-cart-2026.netlify.app/
 
 Frontend (Netlify / Vercel)
    ↓ HTTPS
